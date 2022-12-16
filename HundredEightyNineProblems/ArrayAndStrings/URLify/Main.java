@@ -98,10 +98,12 @@ public class Main {
         for (int i=0; i<results.length; i++) {
             char[] myResult = results[i];
             char[] expectedResult = expectedResults[i].toCharArray();
-            if (Arrays.equals(myResult, expectedResult)) {
+            if (!Arrays.equals(myResult, expectedResult)) {
                 System.out.println(String.format("Failed for: %s, expected: %s", Arrays.toString(myResult), Arrays.toString(expectedResult)));
             }
-            System.out.println(String.format("good case: %s", Arrays.toString(myResult)));
+            else {
+                System.out.println(String.format("good case: %s", Arrays.toString(myResult)));
+            } 
         }
     }
 }
