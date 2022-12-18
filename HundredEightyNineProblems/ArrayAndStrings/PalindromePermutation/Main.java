@@ -1,4 +1,5 @@
 package HundredEightyNineProblems.ArrayAndStrings.PalindromePermutation;
+import java.util.BitSet;
 import java.util.HashMap;
 
 public class Main {
@@ -31,11 +32,16 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         for (Pair theCase: cases){
-            boolean myResult = main.HashMapSolution(theCase.word);
+            boolean myResultHash = main.HashMapSolution(theCase.word);
+            boolean myResultBit = main.bitArrayXorSolution(theCase.word);
             boolean expectedResult = theCase.result;
-            if (myResult != expectedResult) {
-                System.out.println(String.format("The case: %s, failed, expected value: %b", theCase.word, expectedResult));
+            if (myResultHash != expectedResult) {
+                System.out.println(String.format("The hash case: %s, failed, expected value: %b", theCase.word, expectedResult));
             }
+            if (myResultBit != expectedResult) {
+                System.out.println(String.format("The bit case: %s, failed, expected value: %b", theCase.word, expectedResult));
+            }
+
         }
     }
 
@@ -58,6 +64,24 @@ public class Main {
                 uneven = true;
             }
 
+        }
+        return true;
+    }
+
+    public boolean bitArrayXorSolution(String word){
+        BitSet bitArr = new BitSet();
+        for (char c: word.toCharArray()) {
+            int index = c - 65;
+            boolean result = bitArr.get(index) ^ true;
+            if (result) bitArr.set(index);
+            else bitArr.clear(index);
+        }
+        boolean seenUneven = false;
+        for (int i=0;i<=122-65;i++){
+            if (bitArr.get(i)) {
+                if (seenUneven) return false;
+                seenUneven = true;
+            }
         }
         return true;
     }
