@@ -14,7 +14,9 @@ public class Main {
             new Pair("abc", "abc"),
             new Pair("aaabc", "aaabc"),
             new Pair("aabbcc", "aabbcc"),
-            new Pair("aabbbccdeeee", "a2b3c2d1e4")
+            new Pair("aabbbccdeeee", "a2b3c2d1e4"),
+            new Pair("aaaaabbbb", "a5b4"),
+            new Pair("aaaaabbbbcccdee", "a5b4c3d1e2")
 
         };
         public static void main(String[] args) {
