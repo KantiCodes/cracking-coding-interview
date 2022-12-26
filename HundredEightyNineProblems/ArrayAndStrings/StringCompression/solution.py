@@ -4,11 +4,21 @@ test_cases = [
     ("aabbcc", "aabbcc"),
     ("aabbbccdeeee", "a2b3c2d1e4"),
     ("aaaaabbbb", "a5b4"),
-    ("aaaaabbbbcccdee", "a5b4c3d1e2")
+    ("aaaaabbbbcccdee", "a5b4c3d1e2"),
+    ("aabcccccaaa", "a2b1c5a3"),
+    ("abcdef", "abcdef"),
+    ("aabb", "aabb"),
+    ("aaa", "a3"),
+    ("a", "a"),
+    ("", ""),
+    ]
 
-]
+
 
 def solution(word):
+    if word == "":
+        return ""
+
     count = 1
     last_char = word[0]
     res = []
