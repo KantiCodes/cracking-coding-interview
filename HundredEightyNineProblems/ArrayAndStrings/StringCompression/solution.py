@@ -20,18 +20,19 @@ def solution(word):
         return ""
 
     count = 1
-    last_char = word[0]
     res = []
-    res.append(last_char)
-    for c in word[1:]:
-        if c == last_char:
+    for idx, c in enumerate(word):
+        if idx == 0:
+            continue
+
+        if c == word[idx-1]:
             count += 1
         else:
+            res.append(word[idx-1])
             res.append(str(count))
-            res.append(c)
-            last_char=c
             count = 1
-    
+
+    res.append(word[-1])
     res.append(str(count))
     if len(res) >= len(word): return word
     return "".join(res)
