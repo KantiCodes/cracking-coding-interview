@@ -9,6 +9,7 @@ public class Main {
             this.word = word;
             this.result = result;
         }
+    }
 
         public static Pair[] testCases = {
             new Pair("abc", "abc"),
@@ -35,7 +36,7 @@ public class Main {
                 }
             }
         }
-    }
+    
 
 
     public String Solution(String word) {
