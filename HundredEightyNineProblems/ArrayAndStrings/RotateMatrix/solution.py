@@ -10,21 +10,6 @@ test_cases = [
             [21, 22, 23, 24, 25],
         ],
 
-        # [
-        #     [21, 16, 11 ,6,  1],
-        #     [22 ,17 ,12 ,7,  2],
-        #     [23, 18, 13, 8,  3],
-        #     [24, 19, 14, 9,  4],
-        #     [25, 20, 15, 10, 5],
-        # ],
-
-        # [
-        #     [21, 16, 11 ,6,  1],
-        #     [22 ,17 ,12 ,7,  2],
-        #     [23, 18, 13, 8,  3],
-        #     [24, 19, 14, 9,  4],
-        #     [25, 20, 15, 10, 5],
-        # ],
         
 
         [
@@ -79,17 +64,7 @@ def intermidate_array_solution(arr):
     return building
 
 
-def inplace_solution(arr):
-
-    # arr = [
-    #         [1 , 2 , 3 , 4 , 5 ],
-    #         [6 , 7 , 8 , 9 , 10],
-    #         [11, 12, 13, 14, 15],
-    #         [16, 17, 18, 19, 20],
-    #         [21, 22, 23, 24, 25],
-    # ]
-
-
+def inplace_solution_dirty(arr):
     N = len(arr)
 
 
@@ -107,13 +82,38 @@ def inplace_solution(arr):
 
             rotate(top_left_idx, top_right_idx, bottom_left_idx, bottom_right_idx, arr)
 
-            # print(f"{top_left_idx}, {top_right_idx} \n {bottom_left_idx}, {bottom_right_idx}")
-            # print("-------------------")
-            # print(f"{top_left_value}, {top_right_value} \n {bottom_left_value}, {bottom_right_value}")
-
-            # input("go?")
         i = i + 1
     return arr
+
+
+def inplace_solution_clean(arr):
+    N = len(arr)
+
+    for row_idx in range(N//2):
+        for val_id in range(row_idx, N-row_idx - 1):
+
+            # print(f"Top: {arr[row_idx][val_id]}, Right: {arr[val_id][N - 1 - row_idx]}")
+            # print(f"Left: {arr[N - 1 - val_id][row_idx]}, Bottom: {arr[N - 1 - row_idx][N - 1 - val_id]}")
+            top = arr[row_idx][val_id]
+            
+            # top <- left
+            arr[row_idx][val_id] = arr[N - 1 - val_id][row_idx]
+
+            # left <- bottom
+            arr[N - 1 - val_id][row_idx] = arr[N - 1 - row_idx][N - 1 - val_id]
+
+
+            # botton <- right
+            arr[N - 1 - row_idx][N - 1 - val_id] = arr[val_id][N - 1 - row_idx]
+
+            # right <- top (original)
+            arr[val_id][N - 1 - row_idx] = top
+            # input("siema")
+
+    return arr
+
+
+
     
 def get_arr_value(arr, idx):
     return arr[idx[0]][idx[1]]
@@ -148,15 +148,28 @@ def rotate(tl_idx, tr_idx, bl_idx, br_idx, arr):
             
 # inplace_solution(1)
 
-
-for idx, (case, expected_result) in enumerate(test_cases):
-    print(f"testing case: {case}")
-    result = inplace_solution(case)
-
-    if result != expected_result:
-        print("Failed")
-        for row in result:
-            print(row)
+def print_case(case):
+    for row in case:
+        print(row)
 
 
+def test(f, test_cases):
+    print(f"Testing: {f}")
+    for idx, (case, expected_result) in enumerate(test_cases):
+        print("-"*20)
+        print("Case")
+        print_case(case)
+        result = f(case)
+
+        if result != expected_result:
+            # print("Failed, I expected:")
+            # print_case(expected_result)
+            # print("But got:")
+            for row in result:
+                print(row)
+        print("-"*20)
+
+
+test(inplace_solution_clean, test_cases)
+test(inplace_solution_dirty, test_cases)
 
