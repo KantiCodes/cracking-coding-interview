@@ -1,6 +1,6 @@
-package LinkedList;
+package DataStructures.LinkedList;
 
-import LinkedList.Main.Node;;
+import DataStructures.LinkedList.Main.Node;;
 
 public class Some {
 
